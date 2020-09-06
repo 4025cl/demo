@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>table模块快速使用</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+</head>
+<body>
+  springboot
+<table id="demo_user" lay-filter="test"></table>
+  <script type="text/html" id="barDemo">
+      <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
+      <a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
+      <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+  </script>
+<script th:src="@{/layui/layui.js}"></script>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+        //第一个实例
+        table.render({
+            elem: '#demo_user'
+            ,height: 312
+            ,toolbar: '#barDemo'
+            ,url: '/findall' //数据接口
+            ,page: true //开启分页
+            ,cols: [
+                [ //表头
+                {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
+                ,{field: 'name', title: '用户名', width:80}
+                ,{field: 'age', title: '年龄', width:80, sort: true}
+                ,{field: 'email', title: '邮箱', width:150},
+                    ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+                ]
+            ]
+        });
+    });
+</script>
+</body>
+</html>
